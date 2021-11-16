@@ -88,6 +88,7 @@
                     <a href="http://hlly352.synology.me:5000">主页</a>
                     <a href="http://hlly352.synology.me:444/index.php">nextcloud</a>
                     <a href="https://laravel-news.com">短音</a>
+
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
