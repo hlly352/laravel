@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://hlly352.synology.me:5000">主页</a>
+                    <a href="http://hlly352.synology.me:5000">测试，我成功了吗</a>
                     <a href="http://hlly352.synology.me:444/index.php">nextcloud</a>
                     <a href="https://laravel-news.com">短音</a>
 
