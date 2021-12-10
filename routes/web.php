@@ -14,6 +14,27 @@
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 Route::get('/index', function (){
 	return 'dd';
+=======
+//获取配置信息
+Route::get('/config',function(){
+	echo Config::get('app.path').'<hr>';
+	echo Config::get('database.default').'<hr>';
+	//获取env文件内容
+	echo env('APP_ENV');
+});
+//get路由测试
+Route::get('/form',function(){
+	return view('form');
+});
+//post路由测试
+Route::post('/test',function(){
+	dump($_POST);
+});
+//带参数的路由
+Route::get('/user/{id}',function($id){
+	echo $id;
+>>>>>>> 04a99f8d958b1a62ccb48f8103554bef74db3f5a
 });
