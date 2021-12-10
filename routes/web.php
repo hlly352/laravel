@@ -29,3 +29,7 @@ Route::get('/form',function(){
 Route::post('/test',function(){
 	dump($_POST);
 });
+//带参数的路由
+Route::get('/user/{id}',function($id){
+	echo $id;
+});
