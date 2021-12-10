@@ -37,3 +37,7 @@ Route::post('/test',function(){
 Route::get('/user/{id}',function($id){
 	echo $id;
 });
+//限定参数的类型
+Route::get('/users/{names}',function($name){
+	echo $name;
+})->where('names', '[a-z]+');
