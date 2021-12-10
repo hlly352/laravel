@@ -10,6 +10,7 @@
 		<input type="text" name=username"">
 		{{csrf_field()}}
 		<button>提交</button>
+		<a href="/delete?id=3">删除</a>
 	</form>
 </body>
 </html>

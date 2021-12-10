@@ -34,10 +34,16 @@ Route::post('/test',function(){
 	dump($_POST);
 });
 //带参数的路由
-Route::get('/user/{id}',function($id){
-	echo $id;
+Route::get('/user/{id}/{name}',function($id,$name){
+	echo $id
 });
 //限定参数的类型
 Route::get('/users/{names}',function($name){
 	echo $name;
 })->where('names', '[a-z]+');
+
+	echo $name;
+});
+Route::get('/delete', function(){
+	echo $_GET['id'];
+});
