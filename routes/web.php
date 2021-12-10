@@ -35,15 +35,16 @@ Route::post('/test',function(){
 });
 //带参数的路由
 Route::get('/user/{id}/{name}',function($id,$name){
-	echo $id
-});
+	echo $id;
+	echo '<hr>';
+	echo $name;
+})->where(['id'=>'[0-9]+','name'=>'[a-z]+']);
 //限定参数的类型
 Route::get('/users/{names}',function($name){
 	echo $name;
 })->where('names', '[a-z]+');
 
-	echo $name;
-});
+//地址栏中？带参数
 Route::get('/delete', function(){
 	echo $_GET['id'];
 });
