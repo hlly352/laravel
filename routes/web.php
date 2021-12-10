@@ -14,10 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
+
 Route::get('/index', function (){
 	return 'dd';
-=======
+});
 //获取配置信息
 Route::get('/config',function(){
 	echo Config::get('app.path').'<hr>';
@@ -36,5 +36,4 @@ Route::post('/test',function(){
 //带参数的路由
 Route::get('/user/{id}',function($id){
 	echo $id;
->>>>>>> 04a99f8d958b1a62ccb48f8103554bef74db3f5a
 });
