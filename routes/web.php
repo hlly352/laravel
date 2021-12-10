@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', function (){
+	return 'dd';
+});
 //获取配置信息
 Route::get('/config',function(){
 	echo Config::get('app.path').'<hr>';
