@@ -36,7 +36,9 @@ Route::post('/test',function(){
 //带参数的路由
 Route::get('/user/{id}/{name}',function($id,$name){
 	echo $id;
+	echo '<hr>';
 	echo $name;
+
 });
 //路由别名
 Route::get('/delete',['as'=>'del', function(){
@@ -90,3 +92,15 @@ Route::get('/test_mid', ['middleware'=>'login', function(){
 //使用控制器
 Route::get('/','Home\IndexController@index');
 Route::get('/add', 'Home\IndexController@add');
+
+
+//限定参数的类型
+Route::get('/users/{names}',function($name){
+	echo $name;
+})->where('names', '[a-z]+');
+
+//地址栏中？带参数
+Route::get('/delete', function(){
+	echo $_GET['id'];
+});
+
