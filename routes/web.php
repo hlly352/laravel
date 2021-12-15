@@ -34,7 +34,7 @@ Route::post('/test',function(){
 	dump($_POST);
 });
 //带参数的路由
-Route::get('/user/{id}/{name}',function($id,$name){
+Route::get('/user/{id}*{name}',function($id,$name){
 	echo $id;
 	echo '<hr>';
 	echo $name;
