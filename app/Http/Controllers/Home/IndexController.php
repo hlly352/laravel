@@ -15,7 +15,20 @@ class IndexController extends Controller
     //添加控制器
     public function add()
     {
-    	echo '添加页面';
+    	return view('home/user/add');
     }
-
+    //插入控制器
+    public function insert()
+    {
+    	dump($_POST);
+    }
+    //编辑控制器
+    public function edit($id)
+    {
+    	echo $id;
+    }
+    //删除控制器
+    public function del(){
+    	echo $_GET['id'];
+    }
 }

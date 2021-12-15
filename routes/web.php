@@ -40,6 +40,15 @@ Route::get('/user/{id}/{name}',function($id,$name){
 	echo $name;
 
 });
+//限定参数的类型
+Route::get('/users/{names}',function($name){
+	echo $name;
+})->where('names', '[a-z]+');
+
+//地址栏中？带参数
+Route::get('/delete', function(){
+	echo $_GET['id'];
+});
 //路由别名
 Route::get('/delete',['as'=>'del', function(){
 	echo '路由别名测试'.'<br>';
@@ -91,16 +100,10 @@ Route::get('/test_mid', ['middleware'=>'login', function(){
 
 //使用控制器
 Route::get('/','Home\IndexController@index');
-Route::get('/add', 'Home\IndexController@add');
+Route::get('/add', 'Home\IndexController@add')->middleware('login');
+Route::post('/home/insert', 'Home\IndexController@insert');
+Route::get('/home/edit/{id}', 'Home\IndexController@edit')->where(['id'=>'[0-8]+']);
+Route::get('/home/del', 'Home\IndexController@del');
 
-
-//限定参数的类型
-Route::get('/users/{names}',function($name){
-	echo $name;
-})->where('names', '[a-z]+');
-
-//地址栏中？带参数
-Route::get('/delete', function(){
-	echo $_GET['id'];
-});
-
+//资源控制器
+Route::resource('/admin/user', 'Admin\UserController');
