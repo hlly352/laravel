@@ -105,5 +105,18 @@ Route::post('/home/insert', 'Home\IndexController@insert');
 Route::get('/home/edit/{id}', 'Home\IndexController@edit')->where(['id'=>'[0-8]+']);
 Route::get('/home/del', 'Home\IndexController@del');
 
+//别名
+Route::get('/home/update', ['users'=>'Home\IndexController@update','as'=>'users']);
+//使用 route('users') 可以跳转到当前路由
+
 //资源控制器
 Route::resource('/admin/user', 'Admin\UserController');
+Route::get('/admin/users', 'Admin\UserController@users');
+
+//cookie测试
+Route::get('/admin/req', 'Admin\Usercontroller@req');
+//读取闪存
+Route::get('/admin/olds', 'Admin\Usercontroller@olds');
+
+//返回
+Route::get('/admin/res', 'Admin\Usercontroller@res');

@@ -5,13 +5,15 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<form action="/admin/user" method="post">
+	<form action="/admin/user" method="post" enctype="multipart/form-data">
 		用户名：
-		<input type="text" name=username"">
+		<input type="text" name="username" value="{{old('username')}}">
 		<br>
 		密码：
-		<input type="text" name="password">
+		<input type="text" name="password" value="{{old('password')}}">
 		<br>
+		上传文件：
+		<input type="file" name="profile">
 		{{csrf_field()}}
 		<input type="submit" name="" vlaue="提交">
 	</form>

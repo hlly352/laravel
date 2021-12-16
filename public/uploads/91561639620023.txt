@@ -1,0 +1,412 @@
+unset key protection enable
+set clock dst-off
+set clock ntp
+set clock timezone 8
+set clock dst recurring start-weekday 2 0 3 02:00 end-weekday 1 0 11 02:00
+set vrouter trust-vr sharable
+set vrouter "untrust-vr"
+exit
+set vrouter "trust-vr"
+unset auto-route-export
+exit
+set service "QQ8000" protocol udp src-port 0-65535 dst-port 8000-8000 
+set service "JTL2_HTTP82" protocol tcp src-port 0-65535 dst-port 82-82 
+set service "JTL2_HTTP808" protocol tcp src-port 0-65535 dst-port 808-808 
+set service "xierlin8088" protocol tcp src-port 0-65535 dst-port 8088-8088 
+set service "xierlin8081" protocol tcp src-port 0-65535 dst-port 8081-8081 
+set service "xierlin8082" protocol tcp src-port 0-65535 dst-port 8082-8082 
+set service "qunhui5000" protocol tcp src-port 0-65535 dst-port 5000-5000 
+set service "qunhuiwebdav" protocol tcp src-port 0-65535 dst-port 5005-5005 
+set service "qb" protocol tcp src-port 0-65535 dst-port 6006-6006 
+set service "kedao" protocol tcp src-port 0-65535 dst-port 444-444 
+set service "nextcloud" protocol tcp src-port 0-65535 dst-port 7777-7777 
+set service "music" protocol tcp src-port 0-65535 dst-port 264-264 
+set service "document" protocol tcp src-port 0-65535 dst-port 8083-8083 
+set service "jellfyin" protocol tcp src-port 0-65535 dst-port 8096-8096 
+set service "yuancheng" protocol tcp src-port 0-65535 dst-port 35241-35241 
+set alg appleichat enable
+unset alg appleichat re-assembly enable
+set alg sctp enable
+set auth-server "Local" id 0
+set auth-server "Local" server-name "Local"
+set auth-server "Local" timeout 30
+set auth default auth server "Local"
+set auth radius accounting port 1646
+set admin name "admin"
+set admin password "nE4vJ8raIUDOcRBAssZACNMtlkPv0n"
+set admin auth web timeout 10
+set admin auth server "Local"
+set admin format dos
+set zone "Trust" vrouter "trust-vr"
+set zone "Untrust" vrouter "trust-vr"
+set zone "DMZ" vrouter "trust-vr"
+set zone "VLAN" vrouter "trust-vr"
+set zone "Untrust-Tun" vrouter "trust-vr"
+set zone "Trust" tcp-rst 
+set zone "Untrust" block 
+unset zone "Untrust" tcp-rst 
+set zone "MGT" block 
+unset zone "V1-Trust" tcp-rst 
+unset zone "V1-Untrust" tcp-rst 
+set zone "DMZ" tcp-rst 
+unset zone "V1-DMZ" tcp-rst 
+unset zone "VLAN" tcp-rst 
+set zone "Untrust" screen alarm-without-drop
+set zone "Untrust" screen on-tunnel
+set zone "Untrust" screen icmp-flood
+set zone "Untrust" screen udp-flood
+set zone "Untrust" screen winnuke
+set zone "Untrust" screen port-scan
+set zone "Untrust" screen ip-sweep
+set zone "Untrust" screen tear-drop
+set zone "Untrust" screen syn-flood
+set zone "Untrust" screen ping-death
+set zone "Untrust" screen ip-filter-src
+set zone "Untrust" screen land
+set zone "Untrust" screen syn-frag
+set zone "Untrust" screen tcp-no-flag
+set zone "Untrust" screen unknown-protocol
+set zone "Untrust" screen ip-bad-option
+set zone "Untrust" screen ip-record-route
+set zone "Untrust" screen ip-timestamp-opt
+set zone "Untrust" screen ip-security-opt
+set zone "Untrust" screen ip-loose-src-route
+set zone "Untrust" screen ip-strict-src-route
+set zone "Untrust" screen ip-stream-opt
+set zone "Untrust" screen icmp-fragment
+set zone "Untrust" screen icmp-large
+set zone "Untrust" screen syn-fin
+set zone "Untrust" screen fin-no-ack
+set zone "Untrust" screen limit-session source-ip-based
+set zone "Untrust" screen syn-ack-ack-proxy
+set zone "Untrust" screen limit-session destination-ip-based
+set zone "Untrust" screen icmp-id
+set zone "Untrust" screen tcp-sweep
+set zone "Untrust" screen udp-sweep
+set zone "Untrust" screen ip-spoofing drop-no-rpf-route
+set zone "V1-Untrust" screen tear-drop
+set zone "V1-Untrust" screen syn-flood
+set zone "V1-Untrust" screen ping-death
+set zone "V1-Untrust" screen ip-filter-src
+set zone "V1-Untrust" screen land
+set interface "ethernet0/0" zone "Untrust"
+set interface "ethernet0/1" zone "DMZ"
+set interface "ethernet0/2" zone "Untrust"
+set interface "bgroup0/0" zone "Trust"
+set interface "tunnel.1" zone "Untrust"
+set interface bgroup0/0 port ethernet0/3
+set interface bgroup0/0 port ethernet0/4
+set interface bgroup0/0 port ethernet0/5
+set interface bgroup0/0 port ethernet0/6
+set interface bgroup0/0 port ethernet0/7
+set interface ethernet0/0 ip 218.4.239.66/29
+set interface ethernet0/0 route
+unset interface vlan1 ip
+set interface ethernet0/2 ip 58.210.85.126/30
+set interface ethernet0/2 route
+set interface bgroup0/0 ip 192.168.1.1/24
+set interface bgroup0/0 route
+set interface tunnel.1 ip unnumbered interface ethernet0/2
+set interface tunnel.1 mtu 1400
+set interface ethernet0/2 proxy dns
+set interface bgroup0/0 proxy dns
+unset interface vlan1 bypass-others-ipsec
+unset interface vlan1 bypass-non-ip
+set interface ethernet0/0 ip manageable
+set interface ethernet0/2 ip manageable
+set interface bgroup0/0 ip manageable
+set interface ethernet0/0 manage ping
+set interface ethernet0/0 manage ssh
+set interface ethernet0/0 manage telnet
+set interface ethernet0/0 manage snmp
+set interface ethernet0/0 manage ssl
+set interface ethernet0/0 manage web
+set interface ethernet0/2 manage ping
+set interface ethernet0/2 manage telnet
+set interface ethernet0/2 manage web
+set interface ethernet0/2 vip interface-ip 21 "FTP" 192.168.1.2
+set interface ethernet0/2 vip interface-ip 8088 "xierlin8088" 192.168.1.4
+set interface ethernet0/2 vip interface-ip 8081 "xierlin8081" 192.168.1.6
+set interface ethernet0/2 vip interface-ip 8082 "xierlin8082" 192.168.1.163
+set interface ethernet0/2 vip interface-ip 808 "JTL2_HTTP808" 192.168.1.3
+set interface ethernet0/2 vip interface-ip 82 "JTL2_HTTP82" 192.168.1.7
+set interface ethernet0/0 vip interface-ip 808 "JTL2_HTTP808" 192.168.1.3
+set interface ethernet0/0 vip interface-ip 8088 "xierlin8088" 192.168.1.4
+set interface ethernet0/0 vip interface-ip 444 "kedao" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 5000 "qunhui5000" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 7777 "nextcloud" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 6006 "qb" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 264 "music" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 8083 "document" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 8096 "jellfyin" 192.168.1.142 manual
+set interface ethernet0/0 vip interface-ip 35241 "yuancheng" 192.168.1.144 manual
+set interface ethernet0/0 vip interface-ip 21 "FTP" 192.168.1.2
+set interface ethernet0/0 vip interface-ip 8081 "xierlin8081" 192.168.1.6
+set interface bgroup0/0 dhcp server service
+set interface bgroup0/0 dhcp server enable
+set interface bgroup0/0 dhcp server option gateway 192.168.1.1 
+set interface bgroup0/0 dhcp server option netmask 255.255.255.0 
+set interface bgroup0/0 dhcp server option dns1 61.177.7.1 
+set interface bgroup0/0 dhcp server option dns2 114.114.114.114 
+set interface bgroup0/0 dhcp server option dns3 8.8.8.8 
+set interface bgroup0/0 dhcp server ip 192.168.1.199 mac 1c6f65eae381 
+set interface bgroup0/0 dhcp server ip 192.168.1.200 mac d85d4c51cc2f 
+set interface bgroup0/0 dhcp server ip 192.168.1.203 mac 94de808b8cc4 
+set interface bgroup0/0 dhcp server ip 192.168.1.206 mac 50e549b8d64b 
+set interface bgroup0/0 dhcp server ip 192.168.1.207 mac 4813f3a3c8a5 
+set interface bgroup0/0 dhcp server ip 192.168.1.208 mac acf7f340bf1f 
+set interface bgroup0/0 dhcp server ip 192.168.1.196 mac 74d435698c06 
+set interface bgroup0/0 dhcp server ip 192.168.1.214 mac 74d435f175bc 
+set interface bgroup0/0 dhcp server ip 192.168.1.216 mac 902b3400803a 
+set interface bgroup0/0 dhcp server ip 192.168.1.80 to 192.168.1.191 
+set interface bgroup0/0 dhcp server ip 192.168.1.202 mac fcaa1416857f 
+set interface bgroup0/0 dhcp server ip 192.168.1.210 mac fcaa1417053d 
+set interface bgroup0/0 dhcp server ip 192.168.1.212 mac 74d435c9f7d6 
+set interface bgroup0/0 dhcp server ip 192.168.1.194 mac 94de80ffd446 
+set interface bgroup0/0 dhcp server ip 192.168.1.192 mac 902b34017053 
+set interface bgroup0/0 dhcp server ip 192.168.1.213 mac fcaa14399d41 
+set interface bgroup0/0 dhcp server ip 192.168.1.220 mac 4437e697aad2 
+set interface bgroup0/0 dhcp server ip 192.168.1.221 mac d85d4c51cc2e 
+set interface bgroup0/0 dhcp server ip 192.168.1.232 mac 74d435c9f829 
+set interface bgroup0/0 dhcp server ip 192.168.1.233 mac 94de80ffc54a 
+set interface bgroup0/0 dhcp server ip 192.168.1.235 mac fcaa14645e96 
+set interface bgroup0/0 dhcp server ip 192.168.1.236 mac 50e54929598d 
+set interface bgroup0/0 dhcp server ip 192.168.1.238 mac 74d4356368ee 
+set interface bgroup0/0 dhcp server ip 192.168.1.231 mac 94de806fca65 
+set interface bgroup0/0 dhcp server ip 192.168.1.79 mac 902b340713bc 
+set interface bgroup0/0 dhcp server ip 192.168.1.193 mac 94de8074c916 
+set interface bgroup0/0 dhcp server ip 192.168.1.66 mac 0026b9bb5b13 
+set interface bgroup0/0 dhcp server ip 192.168.1.218 mac 94de80ffd525 
+set interface bgroup0/0 dhcp server ip 192.168.1.211 mac 74d4354fc3f2 
+set interface bgroup0/0 dhcp server ip 192.168.1.195 mac 74d435698c11 
+set interface bgroup0/0 dhcp server ip 192.168.1.215 mac 94de80ffd4c4 
+set interface bgroup0/0 dhcp server ip 192.168.1.209 mac 902b34b9b9d5 
+set interface bgroup0/0 dhcp server ip 192.168.1.237 mac 74d435698ac3 
+set interface bgroup0/0 dhcp server ip 192.168.1.234 mac 902b34ba2526 
+set interface bgroup0/0 dhcp server ip 192.168.1.204 mac 74d435126daf 
+set interface bgroup0/0 dhcp server ip 192.168.1.67 mac 507b9da1371d
+set interface bgroup0/0 dhcp server ip 192.168.1.125 mac 50e549254afd
+unset interface bgroup0/0 dhcp server config next-server-ip
+set flow tcp-mss
+set flow path-mtu
+unset flow no-tcp-seq-check
+set flow tcp-syn-check
+unset flow tcp-syn-bit-check
+set flow reverse-route clear-text prefer
+set flow reverse-route tunnel always
+set pki authority default scep mode "auto"
+set pki x509 default cert-path partial
+set dns host dns1 114.114.114.114
+set dns host dns2 61.177.7.1
+set dns host dns3 0.0.0.0
+set dns host schedule 06:28
+set address "Trust" "192.168.1.100/32" 192.168.1.100 255.255.255.255
+set address "Trust" "192.168.1.108/32" 192.168.1.108 255.255.255.255
+set address "Trust" "192.168.1.11/32" 192.168.1.11 255.255.255.255
+set address "Trust" "192.168.1.111/32" 192.168.1.111 255.255.255.255
+set address "Trust" "192.168.1.113/32" 192.168.1.113 255.255.255.255
+set address "Trust" "192.168.1.115/32" 192.168.1.115 255.255.255.255
+set address "Trust" "192.168.1.117/32" 192.168.1.117 255.255.255.255
+set address "Trust" "192.168.1.138/32" 192.168.1.138 255.255.255.255
+set address "Trust" "192.168.1.139/32" 192.168.1.139 255.255.255.255
+set address "Trust" "192.168.1.141/32" 192.168.1.141 255.255.255.255
+set address "Trust" "192.168.1.160/32" 192.168.1.160 255.255.255.255
+set address "Trust" "192.168.1.163/32" 192.168.1.163 255.255.255.255
+set address "Trust" "192.168.1.2/32" 192.168.1.2 255.255.255.255
+set address "Trust" "192.168.1.210/32" 192.168.1.210 255.255.255.255
+set address "Trust" "192.168.1.211/32" 192.168.1.211 255.255.255.255
+set address "Trust" "192.168.1.212/32" 192.168.1.212 255.255.255.255
+set address "Trust" "192.168.1.218/32" 192.168.1.218 255.255.255.255
+set address "Trust" "192.168.1.219/32" 192.168.1.219 255.255.255.255
+set address "Trust" "192.168.1.22/32" 192.168.1.22 255.255.255.255
+set address "Trust" "192.168.1.231/32" 192.168.1.231 255.255.255.255
+set address "Trust" "192.168.1.232/32" 192.168.1.232 255.255.255.255
+set address "Trust" "192.168.1.233/32" 192.168.1.233 255.255.255.255
+set address "Trust" "192.168.1.234/32" 192.168.1.234 255.255.255.255
+set address "Trust" "192.168.1.235/32" 192.168.1.235 255.255.255.255
+set address "Trust" "192.168.1.236/32" 192.168.1.236 255.255.255.255
+set address "Trust" "192.168.1.237/32" 192.168.1.237 255.255.255.255
+set address "Trust" "192.168.1.238/32" 192.168.1.238 255.255.255.255
+set address "Trust" "192.168.1.3/32" 192.168.1.3 255.255.255.255
+set address "Trust" "192.168.1.4/32" 192.168.1.4 255.255.255.255
+set address "Trust" "192.168.1.5/32" 192.168.1.5 255.255.255.255
+set address "Trust" "192.168.1.6/32" 192.168.1.6 255.255.255.255
+set address "Trust" "192.168.1.61/32" 192.168.1.61 255.255.255.255
+set address "Trust" "192.168.1.66/32" 192.168.1.66 255.255.255.255
+set address "Trust" "192.168.1.67/32" 192.168.1.67 255.255.255.255
+set address "Trust" "192.168.1.7/32" 192.168.1.7 255.255.255.255
+set address "Trust" "192.168.1.8(32)" 192.168.1.8 255.255.255.255
+set address "Trust" "192.168.1.84/32" 192.168.1.84 255.255.255.255
+set address "Trust" "192.168.1.93/32" 192.168.1.93 255.255.255.255
+set address "Trust" "192.168.1.96/32" 192.168.1.96 255.255.255.255
+set address "Trust" "192.168.1.99/32" 192.168.1.99 255.255.255.255
+set address "Trust" "FORBIT INTERNET PC" 192.168.1.192 255.255.255.224
+set address "Trust" "Local-LAN" 192.168.1.0 255.255.255.0
+set address "Untrust" "6" 192.168.1.6 255.255.255.255
+set address "Untrust" "Branch-LAN" 192.168.5.0 255.255.255.0
+set group address "Trust" "CNC_Group"
+set group address "Trust" "ENG_Group"
+set group address "Trust" "FIN_Group"
+set group address "Trust" "FORBIT-GROUP"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.100/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.111/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.113/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.115/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.117/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.138/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.139/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.141/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.160/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.163/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.2/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.210/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.211/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.212/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.218/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.219/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.22/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.231/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.232/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.233/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.235/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.236/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.237/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.238/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.4/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.5/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.6/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.61/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.8(32)"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.84/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.96/32"
+set group address "Trust" "FORBIT-GROUP" add "192.168.1.99/32"
+set group address "Trust" "FORBIT-GROUP" add "FORBIT INTERNET PC"
+set group address "Trust" "GMO_Group"
+set group address "Trust" "IT_Group"
+set group address "Trust" "IT_Group" add "192.168.1.66/32"
+set group address "Trust" "mail_Group"
+set group address "Trust" "mail_Group" add "192.168.1.66/32"
+set group address "Trust" "MC_Group"
+set group address "Trust" "PM_Group"
+set group address "Trust" "PPC_Group"
+set group address "Trust" "Pur_Group"
+set group address "Global" "Forbid Group"
+set ippool "L2TP" 192.168.10.100 192.168.10.200
+set user "123" uid 5
+set user "123" type l2tp
+set user "123" password "Ob3mTc8IN8e/MJsks8C8FenlGQnc4EdvTw=="
+unset user "123" type auth
+set user "123" "enable"
+set user "jtl" uid 2
+set user "jtl" type l2tp
+set user "jtl" password "Y33QVaMUN9Xxe0sPYKCSFlp9zlnIWKugjw=="
+unset user "jtl" type auth
+set user "jtl" "enable"
+set user "test" uid 3
+set user "test" type l2tp
+set user "test" remote ippool "L2TP"
+set user "test" remote dns1 "192.168.1.1"
+set user "test" remote dns2 "61.177.7.1"
+set user "test" password "FsWWDx5gN4G3Agsda9C+R0OwiKnGU2h0cg=="
+unset user "test" type auth
+set user "test" "enable"
+set user-group "L2TP-G" id 5
+set user-group "L2TP-G" user "123"
+set user-group "L2TP-G" user "jtl"
+set user-group "L2TP-G" user "test"
+set crypto-policy
+exit
+set ike gateway "VPN" address 58.210.85.125 Main outgoing-interface "ethernet0/2" preshare "9xfVnp26NCdvNKsGZfCb2bUqoTnmQD+Tpg==" sec-level standard
+set ike gateway "VPN" nat-traversal
+set ike gateway "VPN" nat-traversal udp-checksum
+set ike gateway "VPN" nat-traversal keepalive-frequency 5
+set ike respond-bad-spi 1
+set ike ikev2 ike-sa-soft-lifetime 60
+unset ike ikeid-enumeration
+unset ike dos-protection
+unset ipsec access-session enable
+set ipsec access-session maximum 5000
+set ipsec access-session upper-threshold 0
+set ipsec access-session lower-threshold 0
+set ipsec access-session dead-p2-sa-timeout 0
+unset ipsec access-session log-error
+unset ipsec access-session info-exch-connected
+unset ipsec access-session use-error-log
+set vpn "VPN" gateway "VPN" no-replay tunnel idletime 0 sec-level standard
+set vpn "VPN" monitor rekey
+set vpn "VPN" id 0x1 bind interface tunnel.1
+set vpn "VPN" dscp-mark 0
+set vrouter "untrust-vr"
+exit
+set vrouter "trust-vr"
+exit
+set l2tp default dns1 61.177.7.1
+set l2tp default ippool "L2TP"
+set l2tp "L2TP_Tunnel" id 2 outgoing-interface ethernet0/2 keepalive 60
+set l2tp "L2TP_Tunnel" remote-setting ippool "L2TP" dns1 61.177.7.1
+set l2tp "L2TP_Tunnel" auth server "Local" user-group "L2TP-G"
+set url protocol websense
+exit
+set vpn "VPN" proxy-id local-ip 192.168.1.0/24 remote-ip 192.168.10.0/24 "ANY" 
+set policy id 14 from "Trust" to "Untrust"  "Any" "Dial-Up VPN" "ANY" tunnel l2tp "L2TP_Tunnel" 
+set policy id 14 disable
+set policy id 14
+exit
+set policy id 12 name "test_mail_2" from "Trust" to "Untrust"  "IT_Group" "Any" "DNS" nat src permit 
+set policy id 12 disable
+set policy id 12
+set service "IMAP"
+set service "POP3"
+set service "SMTP"
+exit
+set policy id 13 name "QQ" from "Trust" to "Untrust"  "FORBIT-GROUP" "Any" "QQ8000" nat src permit 
+set policy id 13 disable
+set policy id 13
+exit
+set policy id 9 name "Eamil" from "Trust" to "Untrust"  "Any" "Any" "DNS" nat src permit 
+set policy id 9
+set service "IMAP"
+set service "POP3"
+set service "SMTP"
+exit
+set policy id 4 from "Trust" to "Untrust"  "Local-LAN" "Branch-LAN" "ANY" permit log count 
+set policy id 4
+exit
+set policy id 5 from "Trust" to "Untrust"  "FORBIT-GROUP" "Any" "ANY" nat src deny log 
+set policy id 5
+exit
+set policy id 6 from "Untrust" to "Trust"  "Dial-Up VPN" "Any" "ANY" tunnel l2tp "L2TP_Tunnel" 
+set policy id 6
+exit
+set policy id 3 from "Untrust" to "Trust"  "Branch-LAN" "Local-LAN" "ANY" permit log count 
+set policy id 3
+exit
+set policy id 2 from "Untrust" to "Trust"  "Any" "VIP(ethernet0/2)" "ANY" permit log 
+set policy id 2
+exit
+set policy id 1 from "Trust" to "Untrust"  "Any" "Any" "ANY" nat src permit log count 
+set policy id 1
+exit
+set policy id 15 from "Untrust" to "Trust"  "Any" "VIP(ethernet0/0)" "ANY" permit 
+set policy id 15
+exit
+set nsmgmt bulkcli reboot-timeout 60
+set ssh version v2
+set config lock timeout 5
+unset license-key auto-update
+set telnet client enable
+set ntp interval 1440
+set snmp port listen 161
+set snmp port trap 162
+set vrouter "untrust-vr"
+exit
+set vrouter "trust-vr"
+unset add-default-route
+set route 192.168.5.0/24 interface bgroup0/0
+set route 0.0.0.0/0 interface ethernet0/2 gateway 58.210.85.125
+set route 0.0.0.0/0 interface ethernet0/0 gateway 218.4.239.65
+exit
+set vrouter "untrust-vr"
+exit
+set vrouter "trust-vr"
+exit

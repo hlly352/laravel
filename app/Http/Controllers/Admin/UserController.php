@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Cookie;
 class UserController extends Controller
 {
     /**
@@ -12,10 +12,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         dump('dd');
+        //获取请求方式
+        echo $request->method();
     }
 
     /**
@@ -38,7 +40,30 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        dump($request);
+        // dump($request);
+        echo $request->method();
+        //判断请求方式
+      // dd($request->isMethod('get'));
+       //获取参数
+       // dump($request->all());
+       //上传文件
+       if($request->hasFile('profile'))
+       {
+            //创建新名字
+            $name = rand(1111,9999).time();
+            //获取后缀
+            $suffix = $request->file('profile')->getClientOriginalExtension();
+            dump($suffix);
+            //移动文件
+            $request->file('profile')->move('./uploads',$name.'.'.$suffix);
+       }
+       //闪存跳回
+       //return redirect('/admin/user/create')->withInput();
+       
+       return back()->withInput(
+            $request->except('password')
+        );
+
     }
 
     /**
@@ -90,4 +115,42 @@ class UserController extends Controller
         //
         echo $id;
     }
+    public function users()
+    {
+        echo '资源控制器中后加的方法';
+    }
+    //设置cookie
+    public function req(Request $request)
+    {
+        //设置cookie
+        //第一种方式
+        \Cookie::queue('class','222',10);
+        //第二种方式
+       // return response('Hello world')->cookie('names','lamp',30);
+
+        //读取cookie
+        $rs = Cookie::get('class');
+      //  echo $rs;
+        //第二种方式
+        $res = $request->cookie('names');
+       // dd($res);
+       //flash
+     //  $request->flash();
+       $request->flashOnly('name','age');
+       $request->flashExcept('id');
+    }
+    //闪存
+    public function olds(Request $request)
+    {
+        dump($request->old());
+    }
+    //响应
+    public function res(Request $request)
+    {
+        return 'dd';
+
+        //返回json
+        
+    }
+
 }
