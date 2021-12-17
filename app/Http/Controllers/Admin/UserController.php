@@ -147,10 +147,11 @@ class UserController extends Controller
     //响应
     public function res(Request $request)
     {
-        return 'dd';
+
 
         //返回json
-        
+        $arr = ['apple','pear','banana'];
+        echo json_encode($arr);
     }
 
 }
