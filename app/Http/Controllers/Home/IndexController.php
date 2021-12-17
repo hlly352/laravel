@@ -10,7 +10,7 @@ class IndexController extends Controller
     //
     public function index()
     {
-    	return view('welcome');
+    	return view('home.welcome');
     }
     //添加控制器
     public function add()
