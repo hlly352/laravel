@@ -148,10 +148,17 @@ class UserController extends Controller
     public function res(Request $request)
     {
 
+        return response()->json($request->all());
+        //返回json ajax
+      //  $arr = ['a'=>'apple','b'=>'pear','banana'];
+        // $arr = array('ddd','dbb','bbf');
+        // echo response()->json($arr); 这是错误的
+        // echo json_encode($arr);
+      //  return response()->json($arr);
+        //重定向
+        // return redirect('/add');
+       // return redirect()->route('users');
 
-        //返回json
-        $arr = ['apple','pear','banana'];
-        echo json_encode($arr);
     }
 
 }

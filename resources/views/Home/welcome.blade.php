@@ -13,7 +13,7 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: red;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://hlly352.synology.me:5000">测试，我成功了吗</a>
+                    <a href="https://www.baidu.com">测试</a>
                     <a href="http://hlly352.synology.me:444/index.php">nextcloud</a>
                     <a href="https://laravel-news.com">短音</a>
 
@@ -98,3 +98,6 @@
         </div>
     </body>
 </html>
+@php 
+  //  echo phpinfo();
+@endphp

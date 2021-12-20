@@ -4,6 +4,7 @@
 	<title></title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="/js/jquery.js "></script>
+	<meta name="csrf-token" content="{{csrf_token()}}">
 </head>
 <body>
 	<form action="home/insert" method="post">
@@ -21,11 +22,21 @@
 
 	<button id="buts">ajax返回</button>
 	<script type="text/javascript">
+		$.ajaxSetup({
+			headers:{
+				'X-CSRF-TOKEN':$('meta[name = csrf-token]').attr('content')
+			}
+		})
 		$('#buts').click(function(){
-			$.get('/admin/res', {}, function(data){
-				alert(data);
+			$.post('/admin/res', {'name':'chuan','age':'03'}, function(res){
+				console.log(res);
 			})
 		})
 	</script>
+	@if (session('success'))
+		<div class="alert alert-success">
+			{{session('success')}}
+		</div>
+	@endif
 </body>
 </html>

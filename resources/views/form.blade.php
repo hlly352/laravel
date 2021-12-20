@@ -24,7 +24,7 @@
 			}
 		})
 		$('#but').click(function(){
-			$.post('/ajax', { }, function(data){
+			$.post('/ajax', {}, function(data){
 					alert(data);
 			})
 		})

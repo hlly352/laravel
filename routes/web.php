@@ -106,7 +106,7 @@ Route::get('/home/edit/{id}', 'Home\IndexController@edit')->where(['id'=>'[0-8]+
 Route::get('/home/del', 'Home\IndexController@del');
 
 //别名
-Route::get('/home/update', ['users'=>'Home\IndexController@update','as'=>'users']);
+Route::get('/home/res', ['users'=>'Home\IndexController@del','as'=>'users']);
 //使用 route('users') 可以跳转到当前路由
 
 //资源控制器
@@ -119,4 +119,14 @@ Route::get('/admin/req', 'Admin\Usercontroller@req');
 Route::get('/admin/olds', 'Admin\Usercontroller@olds');
 
 //返回
-Route::get('/admin/res', 'Admin\Usercontroller@res');
+Route::post('/admin/res', 'Admin\Usercontroller@res');
+
+//模板引擎
+Route::get('/home/index', 'Home\IndexController@homepage');
+
+//视图
+Route::get('/admin/news', 'Admin\NewsController@index');
+Route::get('/admin/add', 'Admin\NewsController@add');
+Route::get('/admin/edit', 'Admin\NewsController@edit');
+//连接数据库
+Route::get('/admin/db', 'Admin\NewsController@db');
