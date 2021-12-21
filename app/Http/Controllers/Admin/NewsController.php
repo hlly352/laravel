@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Demo;
 class NewsController extends Controller
 {
     //
@@ -89,6 +90,9 @@ class NewsController extends Controller
     	
     	//dump($rs);
     	func();
+    	//自定义类
+    	$a = new Demo();
+    	echo $a->name;
 
     }
 }
